@@ -19,14 +19,19 @@ if (require.main === module) {
 
 async function run() {
   try {
+    console.log(1);
     core.info(dedent`
 			Auto Assign Issues
 			==================
 			`);
+    console.log(2);
 
     core.info(JSON.stringify(context));
+    console.log(3);
 
     if (isIssuesLabeledEvent(context.payload)) {
+      console.log(4);
+
       const issue = context.payload.issue;
       const label = context.payload.label;
       const labelName = label.name;
