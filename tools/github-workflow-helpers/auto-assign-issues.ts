@@ -1,4 +1,4 @@
-import core from "@actions/core";
+import * as core from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 import dedent from "ts-dedent";
 import type { IssuesLabeledEvent } from "@octokit/webhooks-types";
