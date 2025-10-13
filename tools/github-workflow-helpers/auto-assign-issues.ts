@@ -19,10 +19,12 @@ if (require.main === module) {
 
 async function run() {
   try {
-    console.log(dedent`
+    core.info(dedent`
 			Auto Assign Issues
 			==================
 			`);
+
+    core.info(JSON.stringify(context));
 
     if (isIssuesLabeledEvent(context.payload)) {
       const issue = context.payload.issue;
@@ -68,7 +70,7 @@ async function run() {
     }
   } catch (error) {
     core.setFailed(
-      `Action failed: ${error instanceof Error ? error.message : error}`
+      `Action failed: ${error instanceof Error ? error.stack : error}`
     );
   }
 }
