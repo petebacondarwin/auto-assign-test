@@ -53,12 +53,13 @@ async function run() {
 
     const token = core.getInput("github_token", { required: true });
     const octokit = getOctokit(token);
-    await octokit.rest.issues.addAssignees({
+    const result = await octokit.rest.issues.addAssignees({
       owner: context.repo.owner,
       repo: context.repo.repo,
       issue_number: issue.number,
       assignees: Array.from(assignees),
     });
+    console.log(result);
 
     core.info(
       `Successfully assigned issue #${issue.number} to ${assigneeList}`
