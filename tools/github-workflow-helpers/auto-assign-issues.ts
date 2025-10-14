@@ -7,7 +7,7 @@ import type { IssuesLabeledEvent } from "@octokit/webhooks-types";
  * The mapping of github issue labels to team members for assignment.
  */
 const TEAM_ASSIGNMENTS: { [label: string]: { [jobRole: string]: string } } = {
-  miniflare: { owner: "petebacondarwin" },
+  miniflare: { owner: "petebacondarwin", other: "petexxxbacondarwin" },
 };
 
 if (require.main === module) {
@@ -59,7 +59,7 @@ async function run() {
       issue_number: issue.number,
       assignees: Array.from(assignees),
     });
-    console.log(result);
+    console.dir(result, { depth: null });
 
     core.info(
       `Successfully assigned issue #${issue.number} to ${assigneeList}`
