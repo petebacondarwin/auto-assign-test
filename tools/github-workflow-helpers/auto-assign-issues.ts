@@ -59,7 +59,21 @@ async function run() {
       issue_number: issue.number,
       assignees: Array.from(assignees),
     });
-    console.dir(result, { depth: null });
+
+    const assigned = new Set<string>(
+      result.data.assignees?.map((a) => a.login)
+    );
+
+    const missing = assignees.difference(assigned);
+    if (missing.size > 0) {
+      core.warning(
+        dedent`
+          Not all assignees were added to issue #${issue.number}.
+          They may not be collaborators on the repository.
+          Missing assignees: ${new Intl.ListFormat("en").format(missing)}
+        `
+      );
+    }
 
     core.info(
       `Successfully assigned issue #${issue.number} to ${assigneeList}`
